@@ -1,0 +1,95 @@
+NAME
+    signature-to-image
+
+AUTHOR
+    This Perl Module: Jim Turner <http://home.mesh.net/turnerjw/jim>
+
+    Original PHP code: Thomas J Bradley <hey@thomasjbradley.ca>
+    <http://thomasjbradley.ca/lab/signature-to-image>
+
+COPYRIGHT
+    Copyright (c) 2011 Jim Turner <http://home.mesh.net/turnerjw/jim>. All
+    rights reserved.
+
+    This program is free software; you can redistribute it and/or modify it
+    under the same terms as Perl itself.
+
+    This is a derived work from signature-to-image.php (see below):
+
+    Signature to Image: A supplemental script for Signature Pad that
+    generates an image of the signature's JSON output server-side using PHP.
+
+    project ca.thomasjbradley.applications.signaturetoimage
+
+    author Thomas J Bradley <hey@thomasjbradley.ca>
+
+    link http://thomasjbradley.ca/lab/signature-to-image
+
+    link http://github.com/thomasjbradley/signature-to-image
+
+    copyright Copyright MMXI, Thomas J Bradley
+
+    license New BSD License
+
+    version 1.0.1
+
+    Perl version created 2011/12/02 by Jim Turner
+
+SYNOPSIS
+    signature-to-image.pl [--multiplier=#(5)] [--penwidth=#(2)]
+    [--xmax=#(198)] [--ymax=#(55)] [--pen_color='r,g,b'(20,83,148)]
+    [--background_color='r,g,b'(255,255,255)] json-file|-
+
+    -or-
+
+    cat jason-file | signature-to-image.pl [--multiplier=#(5)]
+    [--penwidth=#(2)] [--xmax=#(198)] [--ymax=#(55)]
+    [--pen_color='r,g,b'(20,83,148)]
+    [--background_color='r,g,b'(255,255,255)] - >imagefile.png
+
+    -or-
+
+    #!/usr/bin/perl -w
+
+    require "signature-to-image.pl"
+
+    my ($img, $err) = &sig2png($json_image [, multiplier => #(5)] [,
+    penwidth => #(2)] [, xmax => #(198)] [, ymax => #(55)] [, pen_color =>
+    'r,g,b'(20,83,148)] [, background_color => 'r,g,b'(255,255,255)])
+
+    if ($err =~ /success/) {
+
+            print $img;
+
+    } else {
+
+            warn "..Could not create png image from json signature string ($err)!\n";
+
+    }
+
+PREREQUISITES
+            GDlib for perl;
+            JSON::Parse;
+
+PURPOSE
+    Create a Perl version of Thomas Bradley's signature-to-image.php for a
+    client.
+
+METHODS
+    sig2png ( STR [, options ] )
+        Converts a json string to a PNG image and returns an array
+        containing the image as a binary string followed by "success" or an
+        empty image string followed by an error message.
+
+        Options:
+
+                multiplier => #  - Multiple image size by # pixels (default 5)
+                penwidth => #  - Width in pixels of each vector to be drawn (will be multiplied by C<multiplier>) (default 2).
+                xmax => #  - maximum width in pixels of the generated image (will be multiplied by C<multiplier>) (default 198).
+                ymax => #  - maximum height in pixels of the generated image (will be multiplied by C<multiplier>) (default 55).
+                pen_color => "r#,g#,b#"  - RGB values (0-255) for color to draw the signature in (default "20,83,148").
+                background_color => "r#,g#,b#"  - RGB values (0-255) for background color (default "255,255,255").
+
+KEYWORDS
+    JSON, JSON::Parse, signature-to-image
+
